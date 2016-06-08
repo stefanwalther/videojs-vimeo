@@ -16,15 +16,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. */
 (function (root, factory) {
-  // if(typeof define === 'function' && define.amd) {
-  //   define(['video.js'], function(videojs){
-  //     return (root.Vimeo = factory(videojs));
-  //   });
-  // } else if(typeof module === 'object' && module.exports) {
-  //   module.exports = (root.Vimeo = factory(require('video.js')));
-  // } else {
-    root.Vimeo = factory(root.videojs);
-  // }
+    
+    if(typeof exports==='object' && typeof module!=='undefined') {
+        module.exports = factory(require('./../video.min'));
+    } else if(typeof define === 'function' && define.amd) {
+        define(['./../videojs.min'], function(videojs){
+            return (root.Vimeo = factory(videojs));
+        });
+    } else {
+        root.Vimeo = factory(root.videojs);
+    }
+    
 }(this, function(videojs) {
   'use strict';
 
